@@ -35,7 +35,24 @@ foreach($grid as $y=>$row){
 }
 
 // Output and free from memory
-header('Content-Type: image/png');
-imagepng($canvas);
-imagedestroy($canvas);
-exit;
+$request_uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : 'avatar.php';
+if( preg_match('/\/avatar.(php|png|jpg|gif)$/', $request_uri, $match) ){
+    switch($match[1]){
+        case 'jpg':
+            header('Content-Type: image/jpeg');
+            imagejpeg($canvas);
+            break;
+        case 'gif':
+            header('Content-Type: image/gif');
+            imagegif($canvas);
+            break;
+        case 'php':
+        case 'png':
+        default:
+            header('Content-Type: image/png');
+            imagepng($canvas);
+            break;
+    }
+    imagedestroy($canvas);
+    exit;
+}

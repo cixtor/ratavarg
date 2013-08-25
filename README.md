@@ -38,12 +38,12 @@ You can do the trick with modern PHP Frameworks using **Routes** but in my case 
 ```
 <IfModule mod_rewrite.c>
     RewriteEngine on
-    RewriteBase /
+    # RewriteBase /
 
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
 
-    RewriteRule ^avatar.png$ avatar.php [L]
+    RewriteRule ^avatar.(png|jpg|gif)$ avatar.php [L]
 </IfModule>
 ```
 
