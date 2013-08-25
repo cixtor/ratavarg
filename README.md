@@ -29,7 +29,7 @@ $ cd ./ratavarg/
 $ php -S 127.0.0.1:8000
 ```
 
-There is a demo available where you can test the functionality: [view HTML demo](http://www.cixtor.org/gravatar) - [view Image demo](http://www.cixtor.org/gravatar/avatar.png)
+There is a demo available where you can test the functionality: [view HTML demo](http://www.cixtor.com/gravatar) - [view Image demo](http://www.cixtor.com/gravatar/avatar.png)
 
 ### avatar.png instead of avatar.php
 
