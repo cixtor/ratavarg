@@ -17,7 +17,7 @@
     jQuery(function(){
         $('#ratavarg #generate').on('click', function(e){
             e.preventDefault();
-            var new_image = $('<img>',{ 'src':'/avatar.php' });
+            var new_image = $('<img>',{ 'src': '/avatar.php?' + Date.now() });
             $('#ratavarg #avatar > img').remove();
             $('#ratavarg #avatar').html(new_image);
         });

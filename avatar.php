@@ -12,8 +12,9 @@ function generate_grid(){
     return $grid;
 }
 
+// Configurable variables
 $config = (object)array();
-$config->width = $config->height = 300; // This is configurable.
+$config->width = $config->height = 300;
 $config->square = $config->width / 5;
 
 $canvas = imagecreatetruecolor($config->width, $config->height);
@@ -36,7 +37,7 @@ foreach($grid as $y=>$row){
 
 // Output and free from memory
 $request_uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : 'avatar.php';
-if( preg_match('/\/avatar.(php|png|jpg|gif)$/', $request_uri, $match) ){
+if( preg_match('/\/avatar.(php|png|jpg|gif)/', $request_uri, $match) ){
     switch($match[1]){
         case 'jpg':
             header('Content-Type: image/jpeg');
