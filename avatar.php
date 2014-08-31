@@ -1,32 +1,43 @@
 <?php
-function generate_grid(){
+function generate_grid( $length=0 ){
     $grid = array();
-    for( $i=0; $i<5; $i++){
+    $modulus = ( $length % 2 == 0 ) ? 1 : 0;
+
+    for( $i=0; $i<$length; $i++){
         $grid[$i] = array();
-        for( $j=0; $j<3; $j++){
-            $grid[$i][$j] = rand(0,1);
+        $limit = ceil( $length / 2 );
+
+        for( $j=0; $j<$limit; $j++){
+            $grid[$i][] = rand(0, 1);
         }
-        $grid[$i][3] = $grid[$i][1];
-        $grid[$i][4] = $grid[$i][0];
+
+        $missing = $length - $limit;
+        $remaining = array_slice( $grid[$i], 0, $missing );
+        $remaining = array_reverse($remaining);
+
+        foreach( $remaining as $remain ){
+            $grid[$i][] = $remain;
+        }
     }
+
     return $grid;
 }
 
 // Configurable variables
 $config = (object) array();
 $config->width = 300;
+$config->grid_length = 5;
 $config->height = $config->width;
-$config->square = $config->width / 5;
+$config->square = $config->width / $config->grid_length;
 
 // Initiate image and allocate colors
 $canvas = imagecreatetruecolor( $config->width, $config->height );
 $white = imagecolorallocate( $canvas, 255, 255, 255 );
-$black = imagecolorallocate( $canvas, 51, 51, 51 );
 $color = imagecolorallocate( $canvas, rand(0,255), rand(0,255), rand(0,255) );
+$grid = generate_grid($config->grid_length);
 
-$grid = generate_grid();
 foreach( $grid as $y0 => $row ){
-    foreach( $row as $x- => $cell ){
+    foreach( $row as $x0 => $cell ){
         $x1 = $x0 * $config->square;
         $x2 = $x1 + $config->square;
         $y1 = $y0 * $config->square;
