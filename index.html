@@ -8,16 +8,22 @@
     body{background:#f5f5f5;margin:0;padding:0}
     #ratavarg{display:table;margin:20px auto 0 auto}
     #ratavarg #generate{margin:0 0 10px 0}
-    #ratavarg #avatar{width:304px;height:304px;background:#fff;padding:1px;border:1px solid #333;border-radius:2px}
+    #ratavarg #avatar{width:304px;height:304px;background:#fff;margin-top:10px;padding:1px;border:1px solid #333;border-radius:2px}
     #ratavarg #avatar > img{width:300px;height:300px}
     #ratavarg #credits{font-size:11px;text-align:center;margin:10px 0 0 0}
+    #ratavarg .form-control{width:148px}
     </style>
     <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
     <script type="text/javascript">
     jQuery(function(){
         $('#ratavarg #generate').on('click', function(e){
             e.preventDefault();
-            var new_image = $('<img>',{ 'src': '/avatar.php?' + Date.now() });
+            var image_url = '/avatar.php?' + Date.now();
+            var image_width = $('#image_width').val();
+            var image_squares = $('#image-squares').val();
+            if( image_width != '' ){ image_url += '&width=' + image_width; }
+            if( image_squares != '' ){ image_url += '&squares=' + image_squares; }
+            var new_image = $('<img>',{ 'src': image_url });
             $('#ratavarg #avatar > img').remove();
             $('#ratavarg #avatar').html(new_image);
         });
@@ -28,6 +34,10 @@
 </body>
     <div id="ratavarg">
         <input type="button" value="RatavarG - Generate Avatar" id="generate" class="btn btn-block btn-primary" />
+        <div class="clearfix">
+            <div class="pull-left"><input type="text" id="image_width" class="form-control" placeholder="Width: 300" /></div>
+            <div class="pull-right"><input type="text" id="image-squares" class="form-control" placeholder="Squares: 5" /></div>
+        </div>
         <div id="avatar"><img src="/avatar.php" /></div>
         <div id="credits">
             &copy 2013 <a href="http://cixtor.com/">Cixtor</a>&nbsp;-&nbsp;

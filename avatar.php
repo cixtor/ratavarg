@@ -25,8 +25,8 @@ function generate_grid( $length=0 ){
 
 // Configurable variables
 $config = (object) array();
-$config->width = 300;
-$config->grid_length = 5;
+$config->width = isset($_GET['width']) ? intval($_GET['width']) : 300;
+$config->grid_length = isset($_GET['squares']) ? intval($_GET['squares']) : 5;
 $config->height = $config->width;
 $config->square = $config->width / $config->grid_length;
 
